@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% set duration = 0 %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Manage schools, formations and modules :</h1>
+
+        <h2>Schools</h2>
+
+        <a href="{{ path('addSchool') }}" class="btn btn-primary">Ajouter une école</a>
+
+        <table class="table table-bordered my-3">
+            <tbody>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Adress</th>
+                    <th>City</th>
+                    <th>Formations</th>
+                </tr>
+            </tbody>
+            {% for school in schools %}
+                <tr>
+                    <td class="text-center"><img src="{{ school.photo }}" alt="" class="w-50"></td>
+                    <td><a href="{{ path('school', {id: school.id}) }}">{{ school.name }}</a></td>
+                    <td>{{ school.adress }}</td>
+                    <td>{{ school.city }}</td>
+                    <td>
+                        {{ school.formations | length }}
+                    </td>
+                    <td><a href="{{ path('updateSchool', {id:school.id}) }}" class="btn btn-primary">Modifier</a></td>
+                    <td><a href="{{ path('deleteSchool', {id:school.id}) }}" class="btn btn-danger">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Formations</h2>
+
+        <a href="{{ path('addFormation') }}" class="btn btn-primary">Ajouter une formation</a>
+
+        <table class="table table-bordered my-3">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Duration</th>
+            </tr>
+            </tbody>
+            {% for formation in formations %}
+                <tr>
+                    <td><a href="{{ path('formation', {id: formation.id}) }}">{{ formation.name }}</a></td>
+                    <td>
+                        {% for module in formation.modules %}
+                            {% set duration = duration + module.duration %}
+                        {% endfor %}
+                        <p>{{ duration }} hours</p>
+                    </td>
+                    <td><a href="{{ path('updateFormation', {id:formation.id}) }}" class="btn btn-primary">Modifier</a></td>
+                    <td><a href="{{ path('deleteFormation', {id:formation.id}) }}" class="btn btn-danger">Supprimer</a></td>
+                </tr>
+                {% set duration = 0 %}
+            {% endfor %}
+        </table>
+
+        <h2>Modules</h2>
+
+        <a href="{{ path('addModule') }}" class="btn btn-primary">Ajouter un module</a>
+
+        <table class="table table-bordered my-3">
+            <tbody>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Duration</th>
+            </tr>
+            </tbody>
+            {% for module in modules %}
+                <tr>
+                    <td><a href="{{ path('module', {id: module.id}) }}">{{ module.name }}</a></td>
+                    <td>{{ module.description |raw }}</td>
+                    <td>{{ module.duration }} hours</td>
+                    <td><a href="{{ path('updateModule', {id:module.id}) }}" class="btn btn-primary">Modifier</a></td>
+                    <td><a href="{{ path('deleteModule', {id:module.id}) }}" class="btn btn-danger">Supprimer</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

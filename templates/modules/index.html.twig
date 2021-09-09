@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ModulesController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Modules</h1>
+        <div class="row">
+            {% for module in modules %}
+                <div class="col-4">
+                    <h2><a href="{{ path('module', {id: module.id}) }}">{{ module.name }}</a></h2>
+                    <p>{{ module.description | raw }}</p>
+                    <p>Durée : {{ module.duration }} hours</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

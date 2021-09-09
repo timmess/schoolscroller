@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <h1>Welcome to SchoolScroller</h1>
+
+    <row>
+        <div class="my-3">
+            <h2><a href="{{ path('schools') }}">Our Schools</a></h2>
+            <div class="row">
+                {% for school in schools %}
+                    <div class="col-4 text-center">
+                        <h3><a href="{{ path('school', {id:school.id}) }}">{{ school.name }}</a></h3>
+                        <img class="w-50" src="{{ school.photo }}" alt="">
+                        <p>Située à {{ school.city }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </row>
+
+    <row>
+        <div class="my-3">
+            <h2><a href="{{ path('formations') }}">Our Formations</a></h2>
+            {% for formation in formations %}
+                <h3>{{ formation.name }}</h3>
+            {% endfor %}
+        </div>
+    </row>
+
+    <row>
+        <div class="my-3">
+            <h2><a href="{{ path('modules') }}">Our favorite Modules</a></h2>
+            {% for module in modules %}
+                <h3>{{ module.name }}</h3>
+            {% endfor %}
+        </div>
+    </row>
+</div>
+{% endblock %}

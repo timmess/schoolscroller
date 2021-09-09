@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SchoolController!{% endblock %}
+
+{% block body %}
+<div class="container">
+    <row>
+        <h1>{{ school.name }}</h1>
+        <img class="" src="{{ school.photo }}" alt="">
+        <p>{{ school.adress }}</p>
+        <p>{{ school.city }}</p>
+        <div>
+            Les formations de cette école :
+            <ul>
+                {% for formation in school.formations %}
+                    <li><a href="{{ path('formation', {id: formation.id}) }}">{{ formation.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </row>
+</div>
+{% endblock %}
