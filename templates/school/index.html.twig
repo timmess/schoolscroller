@@ -4,12 +4,12 @@
 
 {% block body %}
 <div class="container">
-    <h1>Our schools</h1>
+    <h1>Nos écoles</h1>
     <div class="row">
         {% for school in schools %}
             <div class="col-6">
                 <h2><a href="{{ path('school', {id:school.id}) }}">{{ school.name }}</a></h2>
-                <img class="w-50" src="{{ school.photo }}" alt="">
+                <img class="w-25" src="{{ school.photo }}" alt="">
                 <p>{{ school.adress }}</p>
                 <p>{{ school.city }}</p>
             </div>

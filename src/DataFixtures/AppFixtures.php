@@ -5,14 +5,32 @@ namespace App\DataFixtures;
 use App\Entity\Formation;
 use App\Entity\Modules;
 use App\Entity\School;
+use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher){
+        $this->passwordHasher = $passwordHasher;
+    }
+
     public function load(ObjectManager $manager)
     {
+        $user = new User();
+        $user->setEmail("a@a.a")
+             ->setPassword($this->passwordHasher->hashPassword(
+                $user,
+                "a"
+            ))
+             ->setRoles(['ROLE_USER']);
+
+        $manager->persist($user);
+
         $faker = Faker\Factory::create('fr_FR');
 
         $schools = [];
@@ -42,12 +60,12 @@ class AppFixtures extends Fixture
             $formations[] = $formation;
         }
 
-        for ($nbModule = 1; $nbModule <= 100; $nbModule++){
-            $i = rand(1, 100);
+        for ($nbModule = 1; $nbModule <= 30; $nbModule++){
+            $i = rand(1, 30);
 
             $module = new Modules();
 
-            for ($a = $i; $a <= 100; $a++){
+            for ($a = $i; $a <= 30; $a++){
                 $formation = $formations[mt_rand(0, count($formations) - 1)];
                 $module->addFormation($formation);
             }

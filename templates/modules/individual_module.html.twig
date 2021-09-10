@@ -10,7 +10,7 @@
             <p>Durée : {{ module.duration }} hours</p>
         </div>
         <div class="row">
-            <h2>Formations du module : </h2>
+            <h2>Formations possédant ce module : </h2>
             {% for formation in module.formation %}
                 <p><a href="{{ path('formation', {id: formation.id}) }}">{{ formation.name }}</a></p>
             {% endfor %}

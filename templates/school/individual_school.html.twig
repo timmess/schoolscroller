@@ -4,19 +4,26 @@
 
 {% block body %}
 <div class="container">
-    <row>
+    <div class="row my-3">
         <h1>{{ school.name }}</h1>
-        <img class="" src="{{ school.photo }}" alt="">
-        <p>{{ school.adress }}</p>
-        <p>{{ school.city }}</p>
-        <div>
-            Les formations de cette école :
-            <ul>
+        <div class="col-3">
+            <img class="w-50" src="{{ school.photo }}" alt="">
+        </div>
+        <div class="col-6">
+            <p>{{ school.adress }}</p>
+            <p>{{ school.city }}</p>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <h2>Les formations de cette école :</h2>
+        <div class="col-6 text-center">
+            <ul class="list-group">
                 {% for formation in school.formations %}
-                    <li><a href="{{ path('formation', {id: formation.id}) }}">{{ formation.name }}</a></li>
+                    <li class="list-group-item"><a href="{{ path('formation', {id: formation.id}) }}">{{ formation.name }}</a></li>
                 {% endfor %}
             </ul>
         </div>
-    </row>
+    </div>
 </div>
 {% endblock %}

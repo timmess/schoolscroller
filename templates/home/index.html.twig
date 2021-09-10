@@ -3,12 +3,12 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-    <h1>Welcome to SchoolScroller</h1>
+<div class="container">
+    <h1>Bienvenue à SchoolScroller</h1>
 
     <row>
         <div class="my-3">
-            <h2><a href="{{ path('schools') }}">Our Schools</a></h2>
+            <h2><a href="{{ path('schools') }}">Nos écoles</a></h2>
             <div class="row">
                 {% for school in schools %}
                     <div class="col-4 text-center">
@@ -23,7 +23,7 @@
 
     <row>
         <div class="my-3">
-            <h2><a href="{{ path('formations') }}">Our Formations</a></h2>
+            <h2><a href="{{ path('formations') }}">Nos formations</a></h2>
             {% for formation in formations %}
                 <h3>{{ formation.name }}</h3>
             {% endfor %}
@@ -32,7 +32,7 @@
 
     <row>
         <div class="my-3">
-            <h2><a href="{{ path('modules') }}">Our favorite Modules</a></h2>
+            <h2><a href="{{ path('modules') }}">Nos modules favoris</a></h2>
             {% for module in modules %}
                 <h3>{{ module.name }}</h3>
             {% endfor %}
